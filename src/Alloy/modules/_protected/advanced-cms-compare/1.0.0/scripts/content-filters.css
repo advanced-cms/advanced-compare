@@ -1,0 +1,19 @@
+.content-filters {
+    padding: 0 5px;
+    user-select: none;
+}
+
+.content-filters .filters{
+    overflow-y: scroll;
+    height: calc(100% - 25px);
+}
+
+.content-filters .filter-box {
+    display: inline-block;
+    width: 20px;
+    height: 15px;
+}
+
+.content-filters label .text{
+    padding-left: 3px;
+}

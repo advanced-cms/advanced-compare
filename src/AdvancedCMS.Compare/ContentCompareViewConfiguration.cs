@@ -10,8 +10,8 @@ namespace AdvancedCMS.Compare
         public ContentCompareViewConfiguration()
         {
             this.Key = "contentcompare";
-            this.ControllerType = "episerver-labs-block-enhancements/content-compare/content-compare-view-controller";
-            this.ViewType = "episerver-labs-block-enhancements/content-compare/compare-view";
+            this.ControllerType = "advanced-cms-compare/content-compare-view-controller";
+            this.ViewType = "advanced-cms-compare/compare-view";
             this.IconClass = "epi-iconCompare";
             this.HideFromViewMenu = true;
         }
