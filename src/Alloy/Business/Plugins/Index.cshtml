@@ -20,6 +20,14 @@
     <input type="submit" />
 }
 
+<h2>Create standard page</h2>
+<p>This will create standard page with versions</p>
+
+@using (Html.BeginForm("CreateStandardPage", "PageVersionsGenerator", FormMethod.Post))
+{
+    <input type="submit" />
+}
+
 <h2>Create Standard Page</h2>
 
 @using (Html.BeginForm("Index", "PageVersionsGenerator", FormMethod.Post))

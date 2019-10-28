@@ -279,6 +279,7 @@
     <Compile Include="Business\PageViewContextFactory.cs" />
     <Compile Include="Business\Plugins\ContentVersionGenerator.cs" />
     <Compile Include="Business\Plugins\PageVersionGeneratorController.cs" />
+    <Compile Include="Business\Plugins\StandardPageVersionsGenerator.cs" />
     <Compile Include="Business\Plugins\StartPageVersionGenerator.cs" />
     <Compile Include="Business\Rendering\AlloyContentAreaRenderer.cs" />
     <Compile Include="Business\Rendering\ErrorHandlingContentRenderer.cs" />

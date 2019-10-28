@@ -18,11 +18,14 @@ namespace Alloy.Business.Plugins
     {
         private readonly ContentVersionGenerator _contentVersionGenerator;
         private readonly StartPageVersionGenerator _startPageVersionGenerator;
+        private readonly StandardPageVersionsGenerator _standardPageVersionsGenerator;
 
-        public PageVersionsGeneratorController(ContentVersionGenerator contentVersionGenerator, StartPageVersionGenerator startPageVersionGenerator)
+        public PageVersionsGeneratorController(ContentVersionGenerator contentVersionGenerator, StartPageVersionGenerator startPageVersionGenerator,
+            StandardPageVersionsGenerator standardPageVersionsGenerator)
         {
             _contentVersionGenerator = contentVersionGenerator;
             _startPageVersionGenerator = startPageVersionGenerator;
+            _standardPageVersionsGenerator = standardPageVersionsGenerator;
         }
 
         public ActionResult Index()
@@ -45,6 +48,13 @@ namespace Alloy.Business.Plugins
         {
             _startPageVersionGenerator.CreateVersions();
             return Content($"Versions updated");
+        }
+
+        [HttpPost]
+        public ActionResult CreateStandardPage()
+        {
+            var result = _standardPageVersionsGenerator.CreateVersions("standardpage");
+            return Content("Standard page created: " + result);
         }
     }
 
