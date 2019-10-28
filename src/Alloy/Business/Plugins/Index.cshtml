@@ -1,0 +1,58 @@
+﻿@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@using EPiServer.Web.Mvc.Html
+@inherits System.Web.Mvc.WebViewPage<Alloy.Business.Plugins.MyViewModel>
+@{
+    Layout = null;
+}
+
+<script type="text/javascript">
+    function createContentVersion() {
+        debugger;
+    }
+</script>
+
+<h2>Update Start Page</h2>
+<p>This will create versions for Start Page and update Jumbotron block</p>
+
+@using (Html.BeginForm("UpdateStartPage", "PageVersionsGenerator", FormMethod.Post))
+{
+    <input type="submit" />
+}
+
+<h2>Create Standard Page</h2>
+
+@using (Html.BeginForm("Index", "PageVersionsGenerator", FormMethod.Post))
+{
+    <div>
+        <label for="contentLink">Content link</label>
+        @Html.TextBoxFor(x => x.ContentLink)
+    </div>
+
+    <div>
+        <label for="versionDate">Date (yyyy-MM-dd HH:mm)</label>
+        @Html.TextBoxFor(x => x.VersionDate)
+    </div>
+
+    <div>
+        <label for="data1">Data 1</label>
+        @Html.TextAreaFor(x => x.Data1)
+    </div>
+
+    <div>
+        <label for="data2">Data 2</label>
+        @Html.TextAreaFor(x => x.Data2)
+    </div>
+
+    <div>
+        <label for="data3">Data 3</label>
+        @Html.TextAreaFor(x => x.Data3)
+    </div>
+
+
+
+    <input type="submit" />
+
+    <input type="button" onclick="createContentVersion()" />
+}
+
