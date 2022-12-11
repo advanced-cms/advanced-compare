@@ -5,6 +5,7 @@ SET CONFIGURATION=Debug
 
 IF "%2"=="Release" (SET CONFIGURATION=Release)
 
-powershell ./build/pack.ps1 -configuration %CONFIGURATION%
+@REM CALL build.cmd Release
+powershell ./build/pack.ps1  -version %1 -configuration %CONFIGURATION%
 
 EXIT /B %errorlevel%

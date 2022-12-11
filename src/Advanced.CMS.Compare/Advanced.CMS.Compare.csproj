@@ -8,6 +8,5 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="EPiServer.CMS.UI.Core" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" />
   </ItemGroup>
 </Project>

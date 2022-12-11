@@ -12,9 +12,7 @@ IF EXIST %AlloyMVC%\App_Data (
 REM Copy the database files to the site.
 XCOPY /y/i build\Database\DefaultSiteContent.episerverdata %AlloyMVC%\App_Data\ || Exit /B 1
 XCOPY /y/i/k build\database\Alloy.mdf %AlloyMVC%\App_Data\ || Exit /B 1
-IF %errorlevel% NEQ 0 EXIT /B %errorlevel%
+XCOPY /y/i/k build\database\commerce.Commerce.mdf %AlloyMVC%\App_Data\ || Exit /B 1
 
-ECHO Yarn install
-CALL yarn --cwd ./clientResources install
 
 EXIT /B %ERRORLEVEL%

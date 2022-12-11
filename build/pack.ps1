@@ -29,14 +29,14 @@ $runtimeNextMajorVersion = ($runtimeMajor.ToString() + ".0.0")
 Get-ChildItem -Path out\ -Exclude dtk | Remove-Item -Recurse -Force
 
 #copy assets approval reviews
-Copy-Item -Path src\ExtendedExternalLinks\ClientResources\ -Destination out\extended-external-links\$version\ClientResources -recurse -Force
-Copy-Item src\ExtendedExternalLinks\module.config out\extended-external-links
-((Get-Content -Path out\extended-external-links\module.config -Raw).TrimEnd() -Replace '=""', "=`"$version`"" ) | Set-Content -Path out\extended-external-links\module.config
-Set-Location $workingDirectory\out\extended-external-links
-Start-Process -NoNewWindow -Wait -FilePath $zip -ArgumentList "a", "extended-external-links.zip", "$version", "module.config"
+Copy-Item -Path src\Advanced.CMS.TimeProperty\ClientResources\ -Destination out\advanced-cms-time-property\$version\ClientResources -recurse -Force
+Copy-Item src\Advanced.CMS.TimeProperty\module.config out\advanced-cms-time-property
+((Get-Content -Path out\advanced-cms-time-property\module.config -Raw).TrimEnd() -Replace '=""', "=`"$version`"" ) | Set-Content -Path out\advanced-cms-time-property\module.config
+Set-Location $workingDirectory\out\advanced-cms-time-property
+Start-Process -NoNewWindow -Wait -FilePath $zip -ArgumentList "a", "advanced-cms-time-property.zip", "$version", "module.config"
 Set-Location $workingDirectory
 
 # Packaging public packages
-dotnet pack -c $configuration /p:PackageVersion=$version /p:CmsUIVersion=$cmsUIVersion /p:CmsUINextMajorVersion=$cmsUINextMajorVersion /p:RuntimeVersion=$runtimeVersion /p:RuntimeNextMajorVersion=$runtimeNextMajorVersion ExtendedExternalLinks.sln
+dotnet pack -c $configuration /p:PackageVersion=$version /p:CmsUIVersion=$cmsUIVersion /p:CmsUINextMajorVersion=$cmsUINextMajorVersion /p:RuntimeVersion=$runtimeVersion /p:RuntimeNextMajorVersion=$runtimeNextMajorVersion Advanced.CMS.TimeProperty.sln
 
 Pop-Location

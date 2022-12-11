@@ -67,7 +67,7 @@ namespace Alloy.Sample
 
             services.AddEmbeddedLocalization<Startup>();
 
-            //services.AddExtendedExternalLinks();
+            //services.AddTimeProperty();
         }
 
 

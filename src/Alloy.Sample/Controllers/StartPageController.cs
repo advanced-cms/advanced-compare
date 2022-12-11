@@ -1,23 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alloy.Sample.Models.Pages;
+﻿using Alloy.Sample.Models.Pages;
 using Alloy.Sample.Models.ViewModels;
 using EPiServer.Web;
 using EPiServer.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Alloy.Sample.Controllers
 {
     public class StartPageController : PageControllerBase<StartPage>
     {
-        private readonly IActionDescriptorCollectionProvider _actionDescriptorCollectionProvider;
-
-        public StartPageController(IActionDescriptorCollectionProvider actionDescriptorCollectionProvider)
-        {
-            _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
-        }
-
         public IActionResult Index(StartPage currentPage)
         {
             var model = PageViewModel.Create(currentPage);
@@ -33,23 +23,8 @@ namespace Alloy.Sample.Controllers
                 editHints.AddConnection(m => m.Layout.CustomerZonePages, p => p.CustomerZonePageLinks);
             }
 
-
-            var result = new List<RouteModel>();
-            var routes = _actionDescriptorCollectionProvider.ActionDescriptors.Items.Where(
-                ad => ad.AttributeRouteInfo != null).Select(ad => new RouteModel
-            {
-                Name = ad.AttributeRouteInfo.Name,
-                Template = ad.AttributeRouteInfo.Template
-            }).ToList();
-
-
             return View(model);
         }
 
-        internal class RouteModel
-        {
-            public string Name { get; set; }
-            public string Template { get; set; }
-        }
     }
 }
