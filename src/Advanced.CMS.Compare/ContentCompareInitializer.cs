@@ -2,6 +2,7 @@
 using EPiServer.Framework.Initialization;
 using EPiServer.ServiceLocation;
 using EPiServer.Web;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Advanced.CMS.Compare
 {

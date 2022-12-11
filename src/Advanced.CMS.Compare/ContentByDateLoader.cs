@@ -1,28 +1,40 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using EPiServer;
 using EPiServer.Core;
-using EPiServer.Editor;
 using EPiServer.Globalization;
 using EPiServer.ServiceLocation;
 using EPiServer.Web;
+using Microsoft.AspNetCore.Http;
 
 namespace Advanced.CMS.Compare
 {
     public class ContentByDateLoader : IContentAreaLoader
     {
         private readonly IContentAreaLoader _defaultContentAreaLoader;
+        private readonly IContextModeResolver _contextModeResolver;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public ContentByDateLoader(IContentAreaLoader defaultContentAreaLoader,
+            IContextModeResolver contextModeResolver,
+            IHttpContextAccessor httpContextAccessor)
+        {
+            _defaultContentAreaLoader = defaultContentAreaLoader;
+            _contextModeResolver = contextModeResolver;
+            _httpContextAccessor = httpContextAccessor;
+        }
 
         public ContentByDateLoader(IContentAreaLoader defaultContentAreaLoader)
         {
             _defaultContentAreaLoader = defaultContentAreaLoader;
+            _contextModeResolver = ServiceLocator.Current.GetInstance<IContextModeResolver>();
+            _httpContextAccessor = ServiceLocator.Current.GetInstance<IHttpContextAccessor>();
         }
 
         public IContent Get(ContentAreaItem contentAreaItem)
         {
-            if (!PageEditing.PageIsInEditMode)
+            if (_contextModeResolver.CurrentMode != ContextMode.Edit)
             {
                 return _defaultContentAreaLoader.Get(contentAreaItem);
             }
@@ -77,16 +89,16 @@ namespace Advanced.CMS.Compare
             return _defaultContentAreaLoader.LoadDisplayOption(contentAreaItem);
         }
 
-        public static DateTime? MaxContentDate
+        private DateTime? MaxContentDate
         {
             get
             {
-                if (HttpContext.Current == null)
+                if (_httpContextAccessor.HttpContext == null)
                 {
                     return null;
                 }
 
-                var maxContentDateStr = HttpContext.Current.Request["maxContentDate"];
+                var maxContentDateStr = _httpContextAccessor.HttpContext.Request.Query["maxContentDate"];
                 if (string.IsNullOrWhiteSpace(maxContentDateStr))
                 {
                     return null;

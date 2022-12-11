@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Advanced.CMS.Compare</id>
+    <version>$PackageVersion$</version>
+    <title>Advanced.CMS.Compare</title>
+    <authors>github.com/advanced-cms</authors>
+    <owners>github.com/advanced-cms</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Addon that allows to compare how each page looked in different points in time</description>
+    <releaseNotes/>
+    <copyright>Copyright 2022</copyright>
+    <tags>episerver optimizely compare</tags>
+    <license type="expression">MIT</license>
+    <icon>logo.png</icon>
+    <projectUrl>https://github.com/advanced-cms/advanced-compare</projectUrl>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="EPiServer.CMS.UI.Core" version="[$CmsUIVersion$, $CmsUINextMajorVersion$)" />
+        <dependency id="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" version="[$RuntimeVersion$, $RuntimeNextMajorVersion$)" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="any/any/modules/_protected/advanced-cms-compare/advanced-cms-compare.zip" buildAction="None" copyToOutput="true"  />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="src\Advanced.CMS.Compare\bin\$configuration$\Advanced.CMS.Compare.dll" target="lib\net6.0\" />
+
+    <file src="out\advanced-cms-compare/advanced-cms-compare.zip" target="contentFiles\any\any\modules\_protected\advanced-cms-compare\" />
+
+    <file src="build\CopyZipFiles.targets" target="build\net6.0\Advanced.CMS.Compare.targets" />
+    <file src="src\Advanced.CMS.Compare\readme.txt" target="" />
+    <file src="assets\logo.png" target="" />
+  </files>
+</package>
