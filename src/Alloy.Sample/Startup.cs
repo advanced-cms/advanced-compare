@@ -11,7 +11,6 @@ using EPiServer.Framework.Web.Resources;
 using EPiServer.Scheduler;
 using EPiServer.Web.Mvc.Html;
 using EPiServer.Web.Routing;
-using ExtendedExternalLinks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -68,7 +67,7 @@ namespace Alloy.Sample
 
             services.AddEmbeddedLocalization<Startup>();
 
-            services.AddExtendedExternalLinks();
+            //services.AddExtendedExternalLinks();
         }
 
 

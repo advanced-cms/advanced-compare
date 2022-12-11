@@ -13,7 +13,7 @@ namespace Alloy.Sample
             var uiSolutionFolder = Path.Combine(applicationRootPath, uiSolutionRelativePath);
             services.Configure<CompositeFileProviderOptions>(c =>
             {
-                c.BasePathFileProviders.Add(new MappingPhysicalFileProvider("/EPiServer/extended-external-links", string.Empty, Path.Combine(uiSolutionFolder, @"src\ExtendedExternalLinks")));
+                c.BasePathFileProviders.Add(new MappingPhysicalFileProvider("/EPiServer/advanced-cms-compare", string.Empty, Path.Combine(uiSolutionFolder, @"src\Advanced.CMS.Compare")));
             });
             return services;
         }
