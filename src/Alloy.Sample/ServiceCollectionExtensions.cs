@@ -10,11 +10,11 @@ namespace Alloy.Sample
         /// <internal-api/>
         public static IServiceCollection AddUIMappedFileProviders(this IServiceCollection services, string applicationRootPath, string uiSolutionRelativePath)
         {
-            /*var uiSolutionFolder = Path.Combine(applicationRootPath, uiSolutionRelativePath);
+            var uiSolutionFolder = Path.Combine(applicationRootPath, uiSolutionRelativePath);
             services.Configure<CompositeFileProviderOptions>(c =>
             {
-                c.BasePathFileProviders.Add(new MappingPhysicalFileProvider("/EPiServer/advanced-cms-time-property", string.Empty, Path.Combine(uiSolutionFolder, @"src\Advanced.CMS.TimeProperty")));
-            });*/
+                c.BasePathFileProviders.Add(new MappingPhysicalFileProvider("/EPiServer/advanced-cms-compare", string.Empty, Path.Combine(uiSolutionFolder, @"src\Advanced.CMS.Compare")));
+            });
             return services;
         }
     }
