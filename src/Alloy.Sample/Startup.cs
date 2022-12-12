@@ -89,6 +89,9 @@ namespace Alloy.Sample
             {
                 endpoints.MapContent();
                 endpoints.MapControllerRoute("Register", "/Register", new { controller = "Register", action = "Index" });
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

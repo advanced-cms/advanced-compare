@@ -12,7 +12,7 @@
 <h2>Update Start Page</h2>
 <p>This will create versions for Start Page and update Jumbotron block</p>
 
-@using (Html.BeginForm("UpdateStartPage", "PageVersionsGenerator", FormMethod.Post))
+@using (Html.BeginForm("UpdateStartPage", "VersionsGenerator", FormMethod.Post))
 {
     <input type="submit" />
 }
@@ -20,14 +20,14 @@
 <h2>Create standard page</h2>
 <p>This will create standard page with versions</p>
 
-@using (Html.BeginForm("CreateStandardPage", "PageVersionsGenerator", FormMethod.Post))
+@using (Html.BeginForm("CreateStandardPage", "VersionsGenerator", FormMethod.Post))
 {
     <input type="submit" />
 }
 
 <h2>Create Standard Page</h2>
 
-@using (Html.BeginForm("Index", "PageVersionsGenerator", FormMethod.Post))
+@using (Html.BeginForm("Index", "VersionsGenerator", FormMethod.Post))
 {
     <div>
         <label for="contentLink">Content link</label>

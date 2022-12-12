@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using EPiServer.Authorization;
 using EPiServer.Core;
-using EPiServer.Framework;
-using EPiServer.Framework.Initialization;
+using EPiServer.ServiceLocation;
 using EPiServer.Shell.Navigation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +15,7 @@ namespace Alloy.Business.Plugins
         public IEnumerable<MenuItem> GetMenuItems()
         {
             var urlMenuItem1 = new UrlMenuItem("Generate versions", MenuPaths.Global + "/cms/admin/versionsGenerator",
-                "/NewsGeneratorPlugin/Index")
+                "/VersionsGenerator/Index")
             {
                 IsAvailable = context => true,
                 SortIndex = 100,
@@ -30,19 +28,14 @@ namespace Alloy.Business.Plugins
         }
     }
 
-    /*[GuiPlugIn(
-        Area = PlugInArea.AdminMenu,
-        Url = "/custom-plugins/versions-generator",
-        DisplayName = "Content versions generator")]
-    [Authorize(Roles = "CmsAdmins")]*/
     [Authorize(Roles = "CmsAdmin,WebAdmins,Administrators")]
-    public class NewsGeneratorController : Controller
+    public class VersionsGeneratorController : Controller
     {
         private readonly ContentVersionGenerator _contentVersionGenerator;
         private readonly StartPageVersionGenerator _startPageVersionGenerator;
         private readonly StandardPageVersionsGenerator _standardPageVersionsGenerator;
 
-        public NewsGeneratorController(ContentVersionGenerator contentVersionGenerator,
+        public VersionsGeneratorController(ContentVersionGenerator contentVersionGenerator,
             StartPageVersionGenerator startPageVersionGenerator,
             StandardPageVersionsGenerator standardPageVersionsGenerator)
         {
@@ -51,7 +44,7 @@ namespace Alloy.Business.Plugins
             _standardPageVersionsGenerator = standardPageVersionsGenerator;
         }
 
-        public ActionResult Index()
+        public IActionResult Index()
         {
             var model = new MyViewModel();
             return View(model);
