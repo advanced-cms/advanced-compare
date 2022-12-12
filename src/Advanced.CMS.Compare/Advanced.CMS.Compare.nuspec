@@ -30,7 +30,6 @@
     <file src="out\advanced-cms-compare/advanced-cms-compare.zip" target="contentFiles\any\any\modules\_protected\advanced-cms-compare\" />
 
     <file src="build\CopyZipFiles.targets" target="build\net6.0\Advanced.CMS.Compare.targets" />
-    <file src="src\Advanced.CMS.Compare\readme.txt" target="" />
     <file src="assets\logo.png" target="" />
   </files>
 </package>
