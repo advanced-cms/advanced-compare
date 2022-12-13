@@ -8,6 +8,7 @@ using EPiServer.Core;
 using EPiServer.Core.Internal;
 using EPiServer.Globalization;
 using EPiServer.Shell.Services.Rest;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Advanced.CMS.Compare
 {
@@ -35,8 +36,17 @@ namespace Advanced.CMS.Compare
         /// <param name="contentLink">Version agnostic content id</param>
         /// <param name="date">Date of version</param>
         /// <returns>ContentReference to version available at <see cref="date"/></returns>
-        public RestResultBase GetContentVersionByDate(ContentReference contentLink, DateTime date, string language)
+        public RestResultBase GetContentVersionByDate([FromBody] PostGetContentVersionByDate viewModel)
         {
+            if (viewModel == null)
+            {
+                return Rest(null);
+            }
+
+            var contentLink = ContentReference.Parse(viewModel.contentLink);
+            var language = viewModel.language;
+            var date = viewModel.date;
+
             if (ContentReference.IsNullOrEmpty(contentLink))
             {
                 return new RestStatusCodeResult(HttpStatusCode.Conflict);
@@ -47,21 +57,24 @@ namespace Advanced.CMS.Compare
                 language = _languageResolver.GetPreferredCulture().Name;
             }
 
-            var contentVersions = _contentVersionRepository.List(contentLink.ToReferenceWithoutVersion(), language).ToList();
+            var contentVersions = _contentVersionRepository.List(contentLink.ToReferenceWithoutVersion(), language)
+                .ToList();
             if (!contentVersions.Any())
             {
                 return Rest(null);
             }
-            
-            var version = contentVersions.Where(x=>x.Saved < date).OrderByDescending(x=> x.Saved).FirstOrDefault();
+
+            var version = contentVersions.Where(x => x.Saved < date).OrderByDescending(x => x.Saved)
+                .FirstOrDefault();
 
             if (version == null)
             {
                 var oldestVersion = contentVersions.OrderBy(x => x.Saved).First();
-                if (date <= oldestVersion.Saved )
+                if (date <= oldestVersion.Saved)
                 {
                     return Rest(oldestVersion.ContentLink);
                 }
+
                 var newestVersion = contentVersions.OrderByDescending(x => x.Saved).First();
                 if (date <= newestVersion.Saved)
                 {
@@ -76,8 +89,15 @@ namespace Advanced.CMS.Compare
         /// Get all contents that reference content for all content versions
         /// </summary>
         /// <returns></returns>
-        public RestResultBase GetAllReferencedContents(ContentReference contentLink, string language)
+        public RestResultBase GetAllReferencedContents(int id, [FromBody] PostGetAllReferencedContents viewModel)
         {
+            if (viewModel == null)
+            {
+                return Rest(null);
+            }
+            var contentLink = ContentReference.Parse(viewModel.contentLink);
+            var language = viewModel.language;
+
             if (ContentReference.IsNullOrEmpty(contentLink))
             {
                 return new RestStatusCodeResult(HttpStatusCode.Conflict);
@@ -140,5 +160,18 @@ namespace Advanced.CMS.Compare
         public ContentReference ContentLink { get; set; }
         public string Name { get; set; }
         public string SavedDate { get; set; }
+    }
+
+    public class PostGetAllReferencedContents
+    {
+        public string contentLink { get; set; }
+        public string language { get; set; }
+    }
+
+    public class PostGetContentVersionByDate
+    {
+        public string contentLink { get; set; }
+        public DateTime date { get; set; }
+        public string language { get; set; }
     }
 }
