@@ -6,9 +6,11 @@ using EPiServer.Core;
 using EPiServer.DataAccess;
 using EPiServer.Framework;
 using EPiServer.Security;
+using EPiServer.ServiceLocation;
 
 namespace Alloy.Business.Plugins
 {
+    [ServiceConfiguration(typeof(ContentVersionGenerator))]
     public class ContentVersionGenerator
     {
         private readonly IContentRepository _contentRepository;

@@ -7,9 +7,11 @@ using EPiServer.Core;
 using EPiServer.DataAccess;
 using EPiServer.Framework;
 using EPiServer.Security;
+using EPiServer.ServiceLocation;
 
 namespace Alloy.Business.Plugins
 {
+    [ServiceConfiguration(typeof(StandardPageVersionsGenerator))]
     public class StandardPageVersionsGenerator
     {
         private readonly IContentRepository _contentRepository;
